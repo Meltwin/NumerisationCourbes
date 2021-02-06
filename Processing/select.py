@@ -1,8 +1,9 @@
-from typing import Tuple
+from typing import Tuple, List
 from enum import Enum, unique, auto
 from numpy import ndarray, zeros
 
-from Processing import Process, table_course_gene
+from Processing import table_course_gene
+from Processing.process import PointProcess, ImageProcess
 
 
 @unique
@@ -11,7 +12,7 @@ class SelOption(Enum):
     EXCLUDE = auto()
 
 
-class Selector(Process):
+class Selector(ImageProcess):
     def __init__(self) -> None:
         super().__init__()
         self.__include = []
@@ -48,3 +49,20 @@ class Selector(Process):
 
         print("[Select ] Section done.", end="\n\n")
         return self._img
+
+
+class ImageToPoint(PointProcess):
+    """
+    Transcode 1 bit image into a list of points
+
+    Pick only pixels where value is 1
+    """
+    def __init__(self):
+        super().__init__()
+
+    def run(self, img: ndarray) -> List[Tuple[int, int]]:
+        m, n = img.shape
+        for (x, y) in table_course_gene(m,n):
+            if img[x][y] == 0:
+                self._points.append((x, y))
+        return self._points

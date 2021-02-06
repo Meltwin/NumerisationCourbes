@@ -1,9 +1,9 @@
 from typing import Tuple
-from Processing import Process
+from Processing.process import ImageProcess
 from numpy import ndarray, zeros
 
 
-class Isolator(Process):
+class Isolator(ImageProcess):
     """
     Return a 1bit image
         - pixel 0 : the color is too far

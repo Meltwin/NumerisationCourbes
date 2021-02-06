@@ -1,26 +1,8 @@
-from abc import *
 from typing import Tuple
+from Processing.process import Process, ImageProcess
 
 import matplotlib.image as pli
 import numpy as np
-
-
-class Process:
-	def __init__(self):
-		self._img = None
-
-	@abstractmethod
-	def run(self, img: np.ndarray) -> np.ndarray:
-		"""
-		Run the process 
-		"""
-		pass
-
-	def get_img(self) -> np.ndarray:
-		"""
-		Return the processed image or None if the run wasn't run
-		"""
-		return self._img
 
 
 class Pipeline:
@@ -45,7 +27,7 @@ class Pipeline:
 			proc.run()
 
 
-class ImageLoader(Process):
+class ImageLoader(ImageProcess):
 	"""
 	Load an image from the disk into a numpy ndarray 
 	"""
@@ -53,13 +35,16 @@ class ImageLoader(Process):
 		super().__init__()
 		self.__path = path
 		
-	def run(self, img=None) -> np.ndarray:
+	def run(self, _=None) -> np.ndarray:
 		self._img = pli.imread(self.__path)
 		print("[Loading] Loaded file", end="\n\n")
 		return self._img
 
 
 def table_course_gene(x_max: int, y_max: int, x_min: int = 0, y_min: int = 0) -> Tuple[int, int]:
+	"""
+	Make a rectangle pos generator between the two given corners
+	"""
 	for x in range(x_min, x_max):
 		for y in range(y_min, y_max):
 			yield x, y
