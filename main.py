@@ -1,16 +1,22 @@
 from Processing import *
 from Processing.color import Isolator
-import matplotlib.image as pli
+from Processing.select import Selector, SelOption
 import matplotlib.pyplot as plt
+
+COLOR = (.29019, .85882, .705882)
+COLOR_DIST = .38
 
 proc = Pipeline()
 load = ImageLoader("./imgs/c0_redu.png")
-load.run(None)
-color = (.29019, .85882, .705882)
-dist = .38
-i = Isolator(color, dist)
+load.run()
+
+i = Isolator(COLOR, COLOR_DIST)
 i.run(load.get_img())
 
+s = Selector()
+s.add_selection(((0, 0), (600, 330)), SelOption.INCLUDE)
+s.run(i.get_img())
+
 plt.imshow(load.get_img(), cmap="gray")
-plt.imshow(i.get_img(), cmap="gray")
+plt.imshow(s.get_img(), cmap="gray")
 plt.show()

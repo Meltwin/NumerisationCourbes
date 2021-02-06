@@ -46,10 +46,10 @@ class Isolator(Process):
         # Check if the img is the same -> don't make new calculations
         # except if the color has change
         if self.__img_to_process is not img or self.__color_changed:
-            print("[Color] Run distance calculations")
+            print("[ Color ] Run distance calculations")
             self.__img_to_process = img
             self.__calc_distance__()
-            print("[Color] Distances calculated")
+            print("[ Color ] Distances calculated")
 
         # Select the colors
         l, r, _ = img.shape
@@ -58,7 +58,7 @@ class Isolator(Process):
             for x in range(r):
                 if self.__distances[y, x] <= self.__dist:
                     self._img[y, x] = 1
-        print("[Color] Selection done")
+        print("[ Color ] Isolation done", end="\n\n")
         return self._img
 
     # ------------------------------------------ #
@@ -69,7 +69,7 @@ class Isolator(Process):
         l, r, c = self.__img_to_process.shape
         self.__distances = zeros([l, r])
 
-        # Read all the img
+        # Read all the pixels
         for y in range(l):
             for x in range(r):
                 self.__distances[y, x] = self.__distance(self.__img_to_process[y, x])

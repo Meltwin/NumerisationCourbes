@@ -1,4 +1,6 @@
 from abc import *
+from typing import Tuple
+
 import matplotlib.image as pli
 import numpy as np
 
@@ -8,13 +10,13 @@ class Process:
 		self._img = None
 
 	@abstractmethod
-	def run(self, img):
+	def run(self, img: np.ndarray) -> np.ndarray:
 		"""
 		Run the process 
 		"""
 		pass
 
-	def get_img(self):
+	def get_img(self) -> np.ndarray:
 		"""
 		Return the processed image or None if the run wasn't run
 		"""
@@ -34,7 +36,7 @@ class Pipeline:
 		"""
 		self.process.append(proc)
 	
-	def run_all(self):
+	def run_all(self) -> None:
 		"""
 		Run all the registered process
 		"""
@@ -47,10 +49,17 @@ class ImageLoader(Process):
 	"""
 	Load an image from the disk into a numpy ndarray 
 	"""
-	def __init__(self, path: str):
+	def __init__(self, path: str) -> None:
 		super().__init__()
 		self.__path = path
 		
 	def run(self, img=None) -> np.ndarray:
 		self._img = pli.imread(self.__path)
+		print("[Loading] Loaded file", end="\n\n")
 		return self._img
+
+
+def table_course_gene(x_max: int, y_max: int, x_min: int = 0, y_min: int = 0) -> Tuple[int, int]:
+	for x in range(x_min, x_max):
+		for y in range(y_min, y_max):
+			yield x, y
