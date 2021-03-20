@@ -1,8 +1,8 @@
 from typing import Tuple
-from Processing.process import Process, ImageProcess
-
 import matplotlib.image as pli
 import numpy as np
+
+from Processing.process import Process, ImageProcess
 
 
 class Pipeline:

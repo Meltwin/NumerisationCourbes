@@ -131,3 +131,5 @@ dmypy.json
 ## Personnal
 out/
 imgs/
+
+test.py
