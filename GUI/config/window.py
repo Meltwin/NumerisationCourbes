@@ -1,0 +1,3 @@
+WINDOW_DIM = (720, 480)
+WINDOW_BACKGROUND = "#FFFFFF"
+WINDOW_NAME = "Graphical Curves Converter"
