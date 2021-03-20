@@ -1,5 +1,4 @@
 from typing import List, Tuple
-
 from enum import Enum, unique, auto
 
 from Processing.process import PointProcess
@@ -9,6 +8,7 @@ from Processing.process import PointProcess
 class SortOrder(Enum):
     NORMAL = auto()
     CYCLE = auto()
+    NO_SORTING = auto()
 
 
 # ===========================================================
@@ -66,9 +66,9 @@ class Sorting(PointProcess):
             self.__sort_cycle()
         elif self.__mode is SortOrder.NORMAL:
             self.__sort_normal()
-        else:
+        elif self.__mode is not SortOrder.NO_SORTING:
             raise NameError("[Sorting] Incorrect Mode ("+str(self.__mode)+")")
-        print("[Sorting] Process ended well")
+        print("[Sorting] Process ended well", end="\n\n")
 
         # Return
         return self._points

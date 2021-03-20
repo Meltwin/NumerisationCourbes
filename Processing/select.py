@@ -62,7 +62,7 @@ class ImageToPoint(PointProcess):
 
     def run(self, img: ndarray) -> List[Tuple[int, int]]:
         m, n = img.shape
-        for (x, y) in table_course_gene(m,n):
-            if img[x][y] == 0:
+        for (x, y) in table_course_gene(n, m):
+            if img[y][x] == 1:
                 self._points.append((x, y))
         return self._points
