@@ -1,2 +1,6 @@
+from Lib.colors import Colors
+
 RENDER_HEIGHT = 500
 RENDER_WIDTH = 500
+
+BACKGROUND_COLOR = Colors.BLACK
