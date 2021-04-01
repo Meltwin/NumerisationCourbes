@@ -3,6 +3,7 @@ import matplotlib.image as pli
 import numpy as np
 
 from Processing.process import Process, ImageProcess
+from Lib.image import Image
 
 
 class Pipeline:
@@ -29,15 +30,17 @@ class Pipeline:
 
 class ImageLoader(ImageProcess):
 	"""
-	Load an image from the disk into a numpy ndarray 
+	Load an image from the disk into an Image
 	"""
 	def __init__(self, path: str) -> None:
 		super().__init__()
 		self.__path = path
 		
-	def run(self, _=None) -> np.ndarray:
-		self._img = pli.imread(self.__path)
+	def run(self, _=None) -> Image:
+		img = pli.imread(self.__path)
 		print("[Loading] Loaded file", end="\n\n")
+		self._img = Image((0, 0))
+		self._img.fill(img)
 		return self._img
 
 

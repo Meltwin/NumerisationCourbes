@@ -1,6 +1,7 @@
 from abc import *
 from typing import Tuple, List
 from numpy import ndarray
+from Lib.image import Image
 
 
 class Process:
@@ -24,7 +25,7 @@ class ImageProcess(Process):
     def run(self, img: ndarray) -> ndarray:
         pass
 
-    def get_img(self) -> ndarray:
+    def get_img(self) -> Image:
         """
         Return the processed image or None if run() wasn't trigger once
         """
